@@ -115,7 +115,8 @@ export default {
                     this.takePic()
                   })
                   .onCancel(() => {
-                    this.sendMail()
+                    this.expanded = true
+                    // this.sendMail()
                   })
               }
             },
@@ -139,15 +140,15 @@ export default {
       this.doc.addImage(imgData, 'JPEG', 10, 10,Math.round(w)-20,Math.round(h)-20, '', 'MEDIUM') // this.datosImagen.width, this.datosImagen.height)
     },
     sendMail(){
-      this.datosImagen.subject = `digiticket-${date.formatDate(new Date(),'YYYY-MM-DD HHmmss')}`
-      this.expanded = true
+      // this.datosImagen.subject = `digiticket-${date.formatDate(new Date(),'YYYY-MM-DD HHmmss')}`
+      this.expanded = false
       const headerFormDataSinCredentials = {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }
-      var nombre = `digiticket-${date.formatDate(new Date(),'YYYY-MM-DD HHmmss')}`
+      var nombre = `digiticket1-${date.formatDate(new Date(),'YYYY-MM-DD HHmmss')}`
 
       var formData = new FormData()
       formData.append('action', 'sendattach')
@@ -194,7 +195,7 @@ export default {
         .onDismiss(()=>{
               vthis.doc = null
               vthis.doc = new jsPDF() // empezar con documento en blanco
-              vthis.expanded = false
+              vthis.datosImagen.subject = `digiticket-${date.formatDate(new Date(),'YYYY-MM-DD HHmmss')}`
             })
       };
 
